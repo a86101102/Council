@@ -1,6 +1,6 @@
 <template>
   <div class="conference_choose">
-    <p>請選擇會議</p>
+    <p>請 選 擇 會 議</p>
     <div class="conference_list">
       <div class="conference_item">
         <div class="item_block">
@@ -10,6 +10,14 @@
         </div>
         <p class="item_authority">權限：第四十三期學生代表大會 財委</p>
       </div>
+      <div class="conference_item">
+        <div class="item_block">
+          <h2 class="item_block__session">108學年度第一會期</h2>
+          <h2 class="item_block__name">第二次長會</h2>
+          <div class="item_block__time">108.10.02 20:00 開放登入</div>
+        </div>
+        <p class="item_authority">權限：第四十三期學生代表大會 學代</p>
+      </div>
     </div>
   </div>
 </template>
@@ -18,16 +26,16 @@
 export default {
   name: 'ConferenceChoose',
   components: {
-    
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .conference_choose{
   width: 100%;
   flex-grow: 1;
   &>p{
+    color:#000;
     font-size: $text_s;
     margin-bottom: 0;
   }

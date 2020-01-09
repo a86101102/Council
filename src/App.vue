@@ -1,23 +1,27 @@
 <template>
   <div id="app">
-    <Navbar/>
+    <Navbar :page_name="page"/>
     <div id="main" class="container">
       <router-view/>
     </div>
-    <Bottombar/>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Navbar from '@/layout/components/Navbar.vue'
-import Bottombar from '@/layout/components/Bottombar.vue'
+import Footer from '@/layout/components/Footer.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'app',
   components: {
     Navbar,
-    Bottombar,
-  }
+    Footer,
+  },
+  computed: mapState([
+    'page'
+  ]),
 }
 </script>
 

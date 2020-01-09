@@ -1,11 +1,8 @@
 <template>
   <div class="navbar">
-    <div class="navbar__icon"></div>
+    <!-- <div class="navbar__icon"></div> -->
+    <router-link to="/" tag="div" class="navbar__icon"></router-link>
     <h1 class="navbar__title">{{page_name}}</h1>
-    <!-- <div>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/conference_choose">Conference</router-link>
-    </div> -->
   </div>
 </template>
 

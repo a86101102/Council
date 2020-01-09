@@ -1,17 +1,17 @@
 <template>
-  <div class="bottombar">
+  <div class="footer">
     <p>國立成功大學學生代表大會議事系統</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Bottombar',
+  name: 'Footer',
 }
 </script>
 
 <style scoped lang="scss">
-.bottombar{
+.footer{
   height: 48px;
   width: 100%;
   display: flex;
