@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- <LoginWindow/> -->
     <Navbar :page_name="page"/>
     <div id="main" class="container">
       <router-view/>
@@ -11,6 +12,7 @@
 <script>
 import Navbar from '@/layout/components/Navbar.vue'
 import Footer from '@/layout/components/Footer.vue'
+// import LoginWindow from '@/layout/components/LoginWindow.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -18,6 +20,7 @@ export default {
   components: {
     Navbar,
     Footer,
+    // LoginWindow,
   },
   computed: mapState([
     'page'
@@ -41,5 +44,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.container{
+  width: 100%; 
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 </style>
