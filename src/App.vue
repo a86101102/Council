@@ -28,7 +28,6 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: '微軟正黑體', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

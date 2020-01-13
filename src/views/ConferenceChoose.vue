@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import LoginWindow from '@/layout/components/LoginWindow.vue'
+import LoginWindow from '@/components/LoginWindow.vue'
 
 export default {
   name: 'ConferenceChoose',
@@ -84,5 +84,9 @@ export default {
     border-radius: 5px;
     background-color: $secondary;
   }
+}
+
+.item_authority{
+  color: $title1;
 }
 </style>

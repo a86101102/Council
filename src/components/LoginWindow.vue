@@ -1,6 +1,6 @@
 <template>
   <div class="loginWindow container">
-    <div class="center_container">
+    <div class="login_container">
       <div class="conference_item">
         <div class="item_block">
           <h2 class="item_block__session">108學年度第一會期</h2>
@@ -11,12 +11,15 @@
       </div>
       <div class="user_login">
         <div class="account">
-          <label for="">帳 號</label>
-          <input type="text" placeholder="學號">
+          <label for="account">帳 號</label>
+          <input id="account" name="account" type="text" placeholder="學號">
         </div>
         <div class="password">
-          <label for="">密 碼</label>
-          <input type="password" placeholder="學號信箱密碼">
+          <label for="password">密 碼</label>
+          <input id="password" name="password" type="password" placeholder="學號信箱密碼">
+        </div>
+        <div class="enter">
+          <input type="submit" value="登入">
         </div>
       </div>
     </div>
@@ -41,22 +44,34 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  // display: none;
 }
 
-.center_container{
+.login_container{
   width: 100%;
   .user_login{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    label{
+      color:$title1;
+    }
     input{
       text-align: center;
       border: 1.5px #767171 solid;
       border-radius: 7px;
-      margin-left: 20px;
+      margin-left: 15px;
       margin-bottom: 20px;
       padding: 10px 5px;
+      &[type="submit"]{
+        background-color: $primary;
+        border: none;
+        color: #fff;
+        font-size: $text_s;
+        padding: 5px 30px;
+        margin: 0;
+      }
     }
   }
 }
