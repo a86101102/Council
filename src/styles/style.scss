@@ -14,3 +14,24 @@ h1,h2,h3,h4,h5,h6{
   margin-bottom: 0.5rem;
 }
 
+p{
+  font-size: $text;
+  color: $title1;
+}
+
+.window{
+  position: fixed;
+  z-index: 400;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: #f2f2f2dd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::placeholder{
+  color: $notes;
+}

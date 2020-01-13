@@ -1,6 +1,6 @@
 <template>
   <div class="conference_choose">
-    <LoginWindow/>
+    <!-- <LoginWindow/> -->
     <p>請 選 擇 會 議</p>
     <div class="conference_list">
       <div class="conference_item">
@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import LoginWindow from '@/components/LoginWindow.vue'
+// import LoginWindow from '@/components/LoginWindow.vue'
 
 export default {
   name: 'ConferenceChoose',
   components: {
-    LoginWindow,
+    // LoginWindow,
   }
 }
 </script>
@@ -84,9 +84,5 @@ export default {
     border-radius: 5px;
     background-color: $secondary;
   }
-}
-
-.item_authority{
-  color: $title1;
 }
 </style>
