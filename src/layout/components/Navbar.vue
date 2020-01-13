@@ -34,8 +34,8 @@ export default {
     border-radius: 10px;
   }
   h1.navbar__title{
-    font-size: $text_l;
-    font-weight: 700;
+    // font-size: $text_l;
+    // font-weight: 700;
     margin: 0;
     margin-left: 18px;
   }

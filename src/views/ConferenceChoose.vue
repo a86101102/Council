@@ -5,7 +5,7 @@
     <div class="conference_list">
       <div class="conference_item">
         <div class="item_block">
-          <h2 class="item_block__session">108學年度第一會期</h2>
+          <h3 class="item_block__session">108學年度第一會期</h3>
           <h2 class="item_block__name">第一次財委會</h2>
           <div class="item_block__time">108.09.23 19:00 開放登入</div>
         </div>
@@ -13,7 +13,7 @@
       </div>
       <div class="conference_item">
         <div class="item_block">
-          <h2 class="item_block__session">108學年度第一會期</h2>
+          <h3 class="item_block__session">108學年度第一會期</h3>
           <h2 class="item_block__name">第二次常會</h2>
           <div class="item_block__time">108.10.02 20:00 開放登入</div>
         </div>
@@ -37,7 +37,7 @@ export default {
 <style lang="scss">
 .conference_choose{
   width: 100%;
-  flex-grow: 1;
+  // flex-grow: 1;
   &>p{
     color:#000;
     font-size: $text_s;
@@ -70,11 +70,11 @@ export default {
   color: #fff;
   padding: 10px;
   &__session{
-    font-size: $text_m;
+    // font-size: $text_m;
     margin-bottom: 0;
   }
   &__name{
-    font-size: 34px;
+    // font-size: 34px;
     letter-spacing:5px;
   }
   &__time{

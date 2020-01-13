@@ -1,10 +1,10 @@
 <template>
-  <div class="loginWindow container window">
+  <div class="login_window container window">
     <div class="login_container">
       <div class="login_target">
         <div class="conference_item">
           <div class="item_block">
-            <h2 class="item_block__session">108學年度第一會期</h2>
+            <h3 class="item_block__session">108學年度第一會期</h3>
             <h2 class="item_block__name">第二次常會</h2>
             <div class="item_block__time">108.10.02 20:00 開放登入</div>
           </div>
