@@ -19,6 +19,14 @@
         </div>
         <p class="item_authority">權限：第四十三期學生代表大會 學代</p>
       </div>
+      <router-link to="/conference_schedule" tag="div" class="conference_item">
+        <div class="item_block">
+          <h3 class="item_block__session">108學年度第一會期</h3>
+          <h2 class="item_block__name">第二次常會</h2>
+          <div class="item_block__time">108.10.02 20:00 開放登入</div>
+        </div>
+        <p class="item_authority">權限：第四十三期學生代表大會 學代</p>
+      </router-link>
     </div>
   </div>
 </template>
