@@ -1,6 +1,7 @@
 # Council
 
 ## Program structure
+
 ```
 ├── app.js//server
 ├── node_modules
@@ -35,7 +36,7 @@
 ## controllers
 
 Example:
-
+```
 //user_cotroller.js
 
 var user = require('../models/user');
@@ -44,3 +45,4 @@ var user = require('../models/user');
 exports.user_list = function(req, res) {
     res.send('NOT IMPLEMENTED: user list');
 };
+```
