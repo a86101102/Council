@@ -1,27 +1,29 @@
 # Council
 
 ## Program structure
-
-|--app.js//server
-|--routes//根據收到的request，進入不同routes
-|  |--user
-|  |--proposal
-|  |--delibration
-|--models//從DB中找尋資料，對資料進行後處理
-|  |--db
-|  |--mysql
-|--controller
-|  |--user_controller.js
-|--views
-|  |--public//layout
-|  |--ejs or html
-|--assets
-|  |--image
-|  |--css
-|  |--javascripts
-|--node_modules
-|--package.json
-|--config.json
+```
+├── app.js//server
+├── node_modules
+├── package.json
+├── config.json
+├── routes//根據收到的request，進入不同routes
+│   ├── user
+│   ├── proposal
+│   └── delibration
+├── models//從DB中找尋資料，對資料進行後處理
+│   └── db.js
+│── controller
+│   ├── userr_controller.js
+│   ├── proposal_controller.js
+│   └── delibration_controller.js
+├── assets
+│   ├── css
+│   ├── image
+│   └── javascripts
+└── views
+    ├── public
+    └── xxxx.ejs
+```
 
 1.	收到request後，交由特定的router的function所接收，並呼叫相對應的controller。
 2.  透過相對應的controller function來呼叫特定的model做處理。
