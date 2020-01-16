@@ -5,7 +5,8 @@
 |--app.js//server
 |--routes//根據收到的request，進入不同routes
 |  |--user
-|  |--post
+|  |--proposal
+|  |--delibration
 |--models//從DB中找尋資料，對資料進行後處理
 |  |--db
 |  |--mysql
