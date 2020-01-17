@@ -36,17 +36,20 @@
         <td colspan="3" align="left">紀錄中......</td>
       </tr>
     </table>
-    <VoteWindow/>
+    <VoteWindow style="display:none"/>
+    <VoteDetailWindow style="display:none"/>
   </div>
 </template>
 
 <script>
 import VoteWindow from '@/components/VoteWindow.vue'
+import VoteDetailWindow from '@/components/VoteDetailWindow.vue'
 
 export default {
   name: 'ConferenceDetail',
   components: {
     VoteWindow,
+    VoteDetailWindow,
   }
 }
 </script>
