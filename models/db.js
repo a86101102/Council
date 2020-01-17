@@ -1,4 +1,5 @@
-
+var connection = require('./mysql.js');
+connection = connection.connection;
 
 exports.Insert = function Insert(table, data, callback) {
     var sql = "INSERT INTO " + table + " SET ? ";
