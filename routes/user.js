@@ -16,10 +16,14 @@ router.post('signup',function (req, res){
     console.log(data);
 
     db.Insert("user", data, function(err, result){
-        if(err) console.log(err);
+        if(err) {
+            console.log(err);
+            res.send("Create fail!");
+        }
+        else{
+            res.send("Create success!")
+        }
     })
-    res.send("Create success!")
-
 })
 
 router.post('/login',function(req, res){
