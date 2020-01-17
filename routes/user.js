@@ -18,10 +18,10 @@ router.post('/signup',function (req, res){
     db.Insert("user", data, function(err, result){
         if(err) {
             console.log(err);
-            res.send("Create fail!");
+            res.send({create:"Create fail!"});
         }
         else{
-            res.send("Create success!")
+            res.send({create:"Create success!"});
         }
     })
 })
