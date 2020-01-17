@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../model/db');
+var db = require('../models/db');
 
 router.post('/signup',function (req, res){
     var data = {
