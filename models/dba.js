@@ -6,7 +6,7 @@ UPDATE 4
 */
 
 var chalk = require('chalk');
-var connection = require('../model/mysql');
+var connection = require('../models/mysql');
 connection = connection.connection;
 
 var start;
