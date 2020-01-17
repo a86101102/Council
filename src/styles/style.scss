@@ -10,26 +10,32 @@ body{
 }
 
 h1,h2,h3,h4,h5,h6{
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  // margin-top: 0;
+  // margin-bottom: 0.5rem;
+  font-weight: 700;
+  margin: 0;
 }
 
 h1{
-  font-size: $text_l; //ppt24
-  font-weight: 700;
+  font-size: $text_l;     //ppt24
 }
 h2{
-  font-size: 34px;    //ppt20
-  font-weight: 700;
+  font-size: $text_lm;    //ppt20
 }
 h3{
-  font-size: $text_m; //ppt18
-  font-weight: 700;
+  font-size: $text_m;     //ppt18
+}
+h4{
+  font-size: $text_ms;    //ppt16
 }
 
 p{
   font-size: $text;
   color: $title1;
+}
+
+li{
+  list-style-type: none;
 }
 
 .window{

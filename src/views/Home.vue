@@ -42,16 +42,16 @@ export default {
   flex-wrap: wrap;
   flex-grow: 1;
 }
-@media (min-width: 768px) {
-  .home{
-    max-width: 510px;
-  }
-}
-@media (min-width: 989px) {
-  .home{
-    min-width: 860px;
-  }
-}
+// @media (min-width: 510px) {
+//   .home{
+//     max-width: 510px;
+//   }
+// }
+// @media (min-width: 989px) {
+//   .home{
+//     min-width: 860px;
+//   }
+// }
 .home__block_link{
   width: 120px;
   height: 120px;

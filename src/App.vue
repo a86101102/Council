@@ -2,6 +2,7 @@
   <div id="app">
     <LoginWindow style="display: none"/>
     <ErrorWindow style="display: none"/>
+    <!-- <VoteWindow/> -->
     <Navbar :page_name="$route.meta.title"/>
     <div id="main" class="container">
       <router-view/>
@@ -15,6 +16,7 @@ import Navbar from '@/layout/components/Navbar.vue'
 import Footer from '@/layout/components/Footer.vue'
 import LoginWindow from '@/components/LoginWindow.vue'
 import ErrorWindow from '@/components/ErrorWindow.vue'
+// import VoteWindow from '@/components/VoteWindow.vue'
 // import { mapState } from 'vuex'
 
 export default {
@@ -24,6 +26,7 @@ export default {
     Footer,
     LoginWindow,
     ErrorWindow,
+    // VoteWindow,
   },
   // computed: mapState([
   //   'page'
@@ -47,6 +50,17 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
+@media (min-width: 510px) {
+  #main{
+    max-width: 510px;
+  }
+}
+// @media (min-width: 989px) {
+//   #main{
+//     min-width: 880px;
+//   }
+// }
 
 .container{
   width: 100%; 

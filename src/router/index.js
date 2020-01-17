@@ -29,11 +29,23 @@ const routes = [
     path: '/conference_schedule',
     name: 'conference_schedule',
     component: () => import(/* webpackChunkName: "ConferenceSchedule" */ '../views/ConferenceSchedule.vue'),
+  },
+  {
+    path: '/conference_detail',
+    name: 'conference_detail',
+    component: () => import(/* webpackChunkName: "ConferenceDetail" */ '../views/ConferenceDetail.vue'),
   }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if(savedPosition){
+      return savedPosition
+    } else {
+      return { x:0 ,y:0 }
+    }
+  }
 })
 
 // router.beforeEach((to, from, next) => {
