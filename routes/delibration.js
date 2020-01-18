@@ -10,5 +10,5 @@ router.get('/delibration', function(req, res){
         } else {
             res.send(delibration);
         }
-    })
+    });
 })
