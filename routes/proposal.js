@@ -11,5 +11,19 @@ router.get('/proposal/:delibrationID',function(req, res){
             res.json(result[0]);
         }
     })
-})
+});
+
+router.post('/proposal/vote', function(req, res){
+    var caseID = req.body.caseID;
+    var studentID = req.body.studentID;
+    var result = req.body.result;
+    var voteResultSql = "INSERT INTO vote(caseID, studentID, vote) VALUES ( " + caseID + "," + studentID + "," + result + ")";
+    db.Query(voteResultSql, function(voteResult){
+        if(voteResult.insertID.length == 0){
+            res.send("vote fail");
+        } else {
+            res.send("vote success");
+        }
+    });
+});
 module.exports = router;
