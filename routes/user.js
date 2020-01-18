@@ -27,9 +27,9 @@ router.post('/signup',function (req, res){
 })
 
 router.post('/login',function(req, res){
-    var studentId = req.body.id;
+    var ID = req.body.studentID;
     var pw = req.body.password;
-    db.Query('SELECT password FROM `user` WHERE id='+ studentId ,function(password){
+    db.Query('SELECT password FROM `user` WHERE studentID='+ ID ,function(password){
         if(err) {
             console.log(err);
         }

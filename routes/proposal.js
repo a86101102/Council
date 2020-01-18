@@ -16,18 +16,18 @@ router.get('/:delibrationID',function(req, res){
 router.get('/voteResults',function(req, res){
     var DID = req.body.delibrationID;
     var PID = req.body.proposalID;
-    db.Query('SELECT vote FROM `vote` WHERE delibrationID='+ DId + ' and proposalID='+ PId , function(result, err){
+    db.Query('SELECT result FROM `vote` WHERE delibrationID='+ DId + ' and proposalID='+ PId , function(votes, err){
         if(err) {
             console.log(err);
         }
         else{
             var agree=0,disagree=0,total=0;
-            for (let n in result){
+            for (let n in votes){
                 total=total+1;
-                if(result[n]==1){
+                if(votes[n]==1){
                     agree=agree+1;
                 }
-                if(result[n]==2){
+                if(votes[n]==2){
                     disagree=disagree+1;
                 }
             }
@@ -36,7 +36,7 @@ router.get('/voteResults',function(req, res){
             if(agree>disagree){
                 vote_result="同意";
             }
-            else if(agree=disagree){
+            else if(agree==disagree){
                 vote_result="重新投票";
             }
             else{
