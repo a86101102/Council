@@ -104,11 +104,11 @@ router.post('/createProposal', function (req, res) {
         if (err) {
             console.log(err);
             res.send({
-                create: "Create fail!"
+                create: "fail"
             });
         } else {
             res.send({
-                create: "Create success!"
+                create: "success"
             });
         }
     })
