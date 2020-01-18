@@ -30,7 +30,7 @@ router.post('/voteResults',function(req, res){
                     disagree=disagree+1;
                 }
             }
-            var rate=Math.round(agree/total);
+            var rate=Math.round(agree/total*100)+"%";
             var vote_result;
             if(agree>disagree){
                 vote_result="同意";
@@ -43,10 +43,10 @@ router.post('/voteResults',function(req, res){
             }
             db.Query('SELECT cName FROM `case` WHERE caseID='+ CID , function(result){
             var data={
-                "cName": result[0],
+                "caseName": result[0],
                 "result": vote_result,
-                "vote": total,
-                "persent": rate
+                "vote": total+"票",
+                "percent": rate
             }
             res.json(data);
             })
