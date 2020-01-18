@@ -9,7 +9,7 @@ exports.Insert = function Insert(table, data, callback) {
         console.log(i + " : " + data[i]);
     }
     console.log("}");
-    connection.query(sql, data, function(err, results) {
+    connection.query(sql, data, function (err, results) {
         if (err) throw err;
         console.log("Create Success!");
         callback(err, results);
@@ -19,7 +19,7 @@ exports.Insert = function Insert(table, data, callback) {
 exports.DeleteById = function DeleteById(table, id, callback) {
     var sql = "DELETE FROM " + table + " WHERE id = " + id;
     console.log(sql);
-    connection.query(sql, function(err, results) {
+    connection.query(sql, function (err, results) {
         if (err) throw err;
         console.log("DELETE Success!");
         callback(err);
@@ -30,7 +30,7 @@ exports.DeleteByColumn = function DeleteByColumn(table, conditions, callback) {
     var condition = conditionjoin(conditions);
     var sql = "DELETE FROM " + table + " WHERE " + condition;
     console.log(sql);
-    connection.query(sql, function(err, results) {
+    connection.query(sql, function (err, results) {
         if (err) throw err;
         console.log("DELETE Success!");
         callback(err);
@@ -40,7 +40,7 @@ exports.DeleteByColumn = function DeleteByColumn(table, conditions, callback) {
 exports.GetAll = function GetAll(table, order, callback) {
     var sql = "SELECT * FROM " + table + " ORDER BY " + order['column'] + " " + order['order'];
     console.log(sql);
-    connection.query(sql, function(err, results, fields) {
+    connection.query(sql, function (err, results, fields) {
         if (err) throw err;
         callback(results);
     });
@@ -56,7 +56,7 @@ exports.GetColumn = function GetColumn(table, cols, order, callback) {
     }
     var sql = "SELECT " + columns + " FROM " + table + " ORDER BY " + order['column'] + " " + order['order'];
     console.log(sql);
-    connection.query(sql, function(err, results, fields) {
+    connection.query(sql, function (err, results, fields) {
         if (err) throw err;
         callback(results);
     });
@@ -65,7 +65,7 @@ exports.GetColumn = function GetColumn(table, cols, order, callback) {
 exports.FindbyID = function FindbyID(table, id, callback) {
     var sql = "SELECT * FROM " + table + " WHERE id = " + id;
     console.log(sql);
-    connection.query(sql, function(err, results, fields) {
+    connection.query(sql, function (err, results, fields) {
         if (err) throw err;
         callback(results[0]);
     });
@@ -82,14 +82,14 @@ exports.FindbyColumn = function FindbyColumn(table, cols, conditions, callback) 
     var condition = conditionjoin(conditions);
     var sql = "SELECT " + columns + " FROM " + table + " WHERE " + condition;
     console.log(sql);
-    connection.query(sql, function(err, results, fields) {
+    connection.query(sql, function (err, results, fields) {
         if (err) throw err;
         callback(results);
     });
 }
 
 exports.FindbyColumnClear = function FindbyColumnClear(table, cols, conditions, callback) {
-    var ctr=0
+    var ctr = 0
     var columns = "";
     for (var i in cols) {
         columns += cols[i];
@@ -102,13 +102,13 @@ exports.FindbyColumnClear = function FindbyColumnClear(table, cols, conditions, 
         let value = conditions[idx]
         condition += ` ${idx}=${value} `
         ctr++
-        if(ctr !=  Object.keys(conditions).length)
+        if (ctr != Object.keys(conditions).length)
             condition += "AND"
     };
 
     var sql = "SELECT " + columns + " FROM " + table + " WHERE" + condition;
     console.log(sql);
-    connection.query(sql, function(err, results, fields) {
+    connection.query(sql, function (err, results, fields) {
         if (err) throw err;
         callback(results);
     });
@@ -118,7 +118,7 @@ exports.FindbyColumnOrder = function FindbyColumnOrder(table, conditions, order,
     var condition = conditionjoin(conditions);
     var sql = "SELECT * FROM " + table + " WHERE " + condition + " ORDER BY " + order['column'] + " " + order['order'];
     console.log(sql);
-    connection.query(sql, function(err, results, fields) {
+    connection.query(sql, function (err, results, fields) {
         if (err) throw err;
         callback(results);
     });
@@ -149,7 +149,7 @@ exports.Update = function Update(table, datas, conditions, callback) {
         console.log(i + " : " + datas[i]);
     }
     console.log("}");
-    connection.query(sql, function(err, results) {
+    connection.query(sql, function (err, results) {
         if (err) throw err;
         callback(results);
     });
@@ -158,7 +158,7 @@ exports.Update = function Update(table, datas, conditions, callback) {
 exports.UpdatePlusone = function UpdatePlusone(table, col, id, callback) {
     var sql = "UPDATE " + table + " SET " + col + " = " + col + "+1 WHERE id = " + id;
     console.log(sql);
-    connection.query(sql, function(err, results) {
+    connection.query(sql, function (err, results) {
         if (err) throw err;
         callback(results);
     });
@@ -166,8 +166,37 @@ exports.UpdatePlusone = function UpdatePlusone(table, col, id, callback) {
 
 exports.Query = function Query(sql, callback) {
     console.log(sql);
-    connection.query(sql, function(err, results, fields) {
+    connection.query(sql, function (err, results, fields) {
         if (err) throw err;
         callback(results);
     });
+}
+
+function conditionjoin(conditions) {
+    var condition = "";
+    var count = 0;
+    var size = Object.keys(conditions).length - 1;
+    for (var i in conditions) {
+        if (typeof conditions[i] === "number") {
+            condition = condition + i + " = " + conditions[i];
+        } else {
+            if (conditions[i].indexOf(",") != -1) {
+                condition = condition + i + " in( ";
+                var query = conditions[i].split(",");
+                for (var j in query) {
+                    condition += "\'" + query[j] + "\'";
+                    if (j != query.length - 1) condition += ',';
+                }
+                condition += " )";
+            } else {
+                condition = condition + i + " LIKE \'%" + conditions[i] + "%\'";
+            }
+        }
+        if (count == size) {
+            return condition;
+        } else {
+            count++;
+            condition = condition + " AND ";
+        }
+    }
 }
