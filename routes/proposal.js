@@ -12,3 +12,4 @@ router.get('/proposal/:delibrationID',function(req, res){
         }
     })
 })
+module.exports = router;
