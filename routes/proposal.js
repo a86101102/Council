@@ -13,13 +13,14 @@ router.get('/:delibrationID', function(req, res){
     })
 })
 
-router.get('/isVote', function(req, res){
-    var userId = req.body.studentID;
-    var delId = req.body.delibrationID;
-    var isTime = req.body.isTime;
-    db.Query('SELECT chair FROM delibration WHERE delibrationID =' + delId, function(chair){
-        if(userID === chair){
-            res.send("success");
-        }
+router.get('/createVote', function(req, res){
+    var cName = req.body.cName;
+    var dID = req.body.delibrationID;
+    var pID = req.body.proposalID;
+    db.Query('INSERT case (cName,delibrationID,proposalID) VALUES (' + cName + ',' + dID + ',' + pID + ')', function(result){
+        res.send({
+            caseID: result.insertID,
+            cName: cName
+        });
     })
 })
