@@ -13,10 +13,10 @@ router.get('/:delibrationID',function(req, res){
     })
 })
 
-router.get('/voteResults',function(req, res){
+router.post('/voteResults',function(req, res){
     var DID = req.body.delibrationID;
     var PID = req.body.proposalID;
-    db.Query('SELECT result FROM `vote` WHERE delibrationID='+ DId + ' and proposalID='+ PId , function(votes, err){
+    db.Query('SELECT result FROM `vote` WHERE delibrationID='+ DID + ' and proposalID='+ PID , function(votes, err){
         if(err) {
             console.log(err);
         }
