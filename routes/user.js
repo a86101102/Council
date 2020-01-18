@@ -4,7 +4,6 @@ var db = require('../models/db');
 
 router.post('/signup',function (req, res){
     var data = {
-        "id": req.body.id,
         "department": req.body.department,
         "grade": req.body.grade,
         "email": req.body.email,
@@ -29,12 +28,17 @@ router.post('/signup',function (req, res){
 router.post('/login',function(req, res){
     var studentId = req.body.id;
     var pw = req.body.password;
-    db.Query('SELECT password FROM `user` WHERE iD='+ studentId ,function(password){
-        if(pw===password){
-            res.send({isLogin:"success"});
+    db.Query('SELECT password FROM `user` WHERE id='+ studentId ,function(password){
+        if(err) {
+            console.log(err);
         }
         else{
-            res.send({isLogin:"fail"});
+            if(pw===password){
+                res.send({isLogin:"success"});
+            }
+            else{
+                res.send({isLogin:"fail"});
+            }
         }
     })
 
