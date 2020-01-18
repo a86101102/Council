@@ -2,17 +2,27 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models/db');
 
-router.get('/:delibrationID', function (req, res) {
+router.get('/:delibrationID', function(req, res){
     var id = req.params.delibrationID;
-    let col = ['提案單位'];
-    db.FindbyColumn('proposal', col, {
-        'delibrationID': id
-    }, function (result, err) {
-        if (result.length == 0) {
-            res.send('No data');
-        } else {
-            res.json(result[0]);
+    db.Query('SELECT pName FROM proposal WHERE delibrationID =' + id, function(result){
+        if(result.length == 0){
+            res.send("None");
         }
+        else{
+            res.json(result);
+        }
+    })
+})
+
+router.get('/createVote', function(req, res){
+    var cName = req.body.cName;
+    var dID = req.body.delibrationID;
+    var pID = req.body.proposalID;
+    db.Query('INSERT case (cName,delibrationID,proposalID) VALUES (' + cName + ',' + dID + ',' + pID + ')', function(result){
+        res.send({
+            caseID: result.insertID,
+            cName: cName
+        });
     })
 })
 
