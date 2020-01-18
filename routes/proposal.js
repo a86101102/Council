@@ -90,4 +90,29 @@ router.post('/resultsList', function (req, res) {
 })
 
 
+router.post('/createProposal', function (req, res) {
+
+    var data = {
+        "delibrationID": req.body["delibrationID"],
+        "dept": req.body["dept"],
+        "reason": req.body["reason"],
+        "description": req.body["description"],
+        "discussion": req.body["discussion"],
+    }
+
+    db.Insert('proposal', data, function (err, result) {
+        if (err) {
+            console.log(err);
+            res.send({
+                create: "Create fail!"
+            });
+        } else {
+            res.send({
+                create: "Create success!"
+            });
+        }
+    })
+})
+
+
 module.exports = router;
