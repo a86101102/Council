@@ -14,20 +14,10 @@
       <div class="schedule_block">
         <h4 class="schedule_block__title">四、議案與討論事項</h4>
         <div class="schedule_block__detail">
-          <div class="case">
-            <!-- <div class="case__number">第一案</div> -->
-            <router-link to="/conference_detail" tag="div" class="case__number">第一案</router-link>
-            <div class="case__proposer">學生會長</div>
+          <div v-for="(proposal, index) in proposal_list" :key="index" class="case">
+            <router-link to="/conference_detail" tag="div" class="case__number">第{{index+1}}案</router-link>
+            <div class="case__proposer">{{proposal.sponsor}}</div>
           </div>
-          <div class="case">
-            <div class="case__number">第二案</div>
-            <div class="case__proposer">文學院代</div>
-          </div>
-          <div class="case">
-            <div class="case__number">第三案</div>
-            <div class="case__proposer">學生會長</div>
-          </div>
-        </div>
       </div>
       <div class="schedule_block">
         <h4 class="schedule_block__title">五、臨時動議</h4>
@@ -47,6 +37,24 @@ export default {
   name: 'ConferenceSchedule',
   components: {
     // LoginWindow,
+  },
+  data() {
+    return {
+      'proposal_list':[
+        {
+          proposalID: "A320000",
+          sponsor: "學生會長"
+        },
+        {
+          proposalID: "A320001",
+          sponsor: "文學院代"
+        },
+        {
+          proposalID: "A320002",
+          sponsor: "學生會長"
+        }
+      ]
+    }
   }
 }
 </script>
