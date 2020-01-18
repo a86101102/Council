@@ -69,6 +69,24 @@ router.post('/voteResults', function (req, res) {
         }
     })
 })
+router.get("/proposal/:delibrationID/:proposalID", function(req, res){
+    var condition = {
+        "delibrationID": req.body["delibrationID"],
+        "proposalID": req.body["proposalID"]
+    };
+
+    var cols = ["dept", "reason", "description", "discussion"];
+
+    db.FindbyColumn("proposal", cols, condition, function(err, result){
+        if (err){
+            console.log(err);
+        }
+        else{
+            console.log("success");
+            res.send(result);
+        }
+    })
+})
 
 router.post('/resultsList', function (req, res) {
     var CID = req.body["caseID"];
