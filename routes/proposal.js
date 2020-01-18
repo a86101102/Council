@@ -14,9 +14,8 @@ router.get('/:delibrationID',function(req, res){
 })
 
 router.post('/voteResults',function(req, res){
-    var DID = req.body.delibrationID;
-    var PID = req.body.proposalID;
-    db.Query('SELECT result FROM `vote` WHERE delibrationID='+ DID + ' and proposalID='+ PID , function(votes, err){
+    var CID = req.body.caseID;
+    db.Query('SELECT result FROM `vote` WHERE caseID='+ CID , function(votes, err){
         if(err) {
             console.log(err);
         }
@@ -31,7 +30,7 @@ router.post('/voteResults',function(req, res){
                     disagree=disagree+1;
                 }
             }
-            var rate=agree/total;
+            var rate=Math.round(agree/total);
             var vote_result;
             if(agree>disagree){
                 vote_result="同意";
@@ -42,14 +41,16 @@ router.post('/voteResults',function(req, res){
             else{
                 vote_result="反對";
             }
+            db.Query('SELECT cName FROM `case` WHERE caseID='+ CID , function(result){
             var data={
-                "proposalID": DID,
+                "cName": result[0],
                 "result": vote_result,
                 "vote": total,
                 "persent": rate
             }
+            res.json(data);
+            })
         }
-        res.json(data);
     })
 })
 
