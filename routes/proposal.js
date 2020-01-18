@@ -16,6 +16,7 @@ router.get('/:delibrationID', function (req, res) {
     })
 })
 
+
 router.post('/voteResults', function (req, res) {
     var CID = req.body.caseID;
     db.Query('SELECT result FROM `vote` WHERE caseID=' + CID, function (votes, err) {
@@ -24,6 +25,7 @@ router.post('/voteResults', function (req, res) {
         } else {
             var agree = 0,
                 disagree = 0,
+                spoil = 0,
                 total = 0;
             for (let n in votes) {
                 console.log(votes[n])
@@ -34,23 +36,34 @@ router.post('/voteResults', function (req, res) {
                 if (votes[n]["result"] == 2) {
                     disagree = disagree + 1;
                 }
-            }
-            var rate = Math.round(agree / total * 100) + "%";
-            var vote_result;
-            if (agree > disagree) {
-                vote_result = "同意";
-            } else if (agree == disagree) {
-                vote_result = "重新投票";
-            } else {
-                vote_result = "反對";
-            }
-            db.Query('SELECT cName FROM `case` WHERE caseID=' + CID, function (result) {
-                var data = {
-                    "caseName": result[0],
-                    "result": vote_result,
-                    "vote": total + "票",
-                    "percent": rate
+                if (votes[n]["result"] == 3) {
+                    spoil = spoil + 1;
                 }
+            }
+            var agree_rate = Math.round(agree / total * 100) + "%";
+            var disagree_rate = Math.round(disagree / total * 100) + "%";
+            var spoil_rate = Math.round(spoil / total * 100) + "%";
+            db.Query('SELECT cName FROM `case` WHERE caseID=' + CID, function (name) {
+                var data = {
+                    "agree":{
+                        "caseName": name[0]["result"],
+                        "result": "同意",
+                        "vote": agree + "票",
+                        "percent": agree_rate
+                    },
+                    "disagree":{                
+                        "caseName": name[0]["result"],
+                        "result": "不同意",
+                        "vote": disagree + "票",
+                        "percent": disagree_rate
+                    },
+                    "void":{
+                        "caseName": name[0]["result"],
+                        "result": "廢票",
+                        "vote": spoil + "票",
+                        "percent": spoil_rate
+                    }
+                };
                 res.json(data);
             })
         }
