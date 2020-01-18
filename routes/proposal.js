@@ -2,23 +2,22 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models/db');
 
-router.get('/:delibrationID', function(req, res){
+router.get('/:delibrationID', function (req, res) {
     var id = req.params.delibrationID;
-    db.Query('SELECT pName FROM proposal WHERE delibrationID =' + id, function(result){
-        if(result.length == 0){
+    db.Query('SELECT pName FROM proposal WHERE delibrationID =' + id, function (result) {
+        if (result.length == 0) {
             res.send("None");
-        }
-        else{
+        } else {
             res.json(result);
         }
     })
 })
 
-router.get('/createVote', function(req, res){
+router.get('/createVote', function (req, res) {
     var cName = req.body.cName;
     var dID = req.body.delibrationID;
     var pID = req.body.proposalID;
-    db.Query('INSERT case (cName,delibrationID,proposalID) VALUES (' + cName + ',' + dID + ',' + pID + ')', function(result){
+    db.Query('INSERT case (cName,delibrationID,proposalID) VALUES (' + cName + ',' + dID + ',' + pID + ')', function (result) {
         res.send({
             caseID: result.insertID,
             cName: cName
@@ -55,19 +54,19 @@ router.post('/voteResults', function (req, res) {
             var spoil_rate = Math.round(spoil / total * 100) + "%";
             db.Query('SELECT cName FROM `case` WHERE caseID=' + CID, function (name) {
                 var data = {
-                    "agree":{
+                    "agree": {
                         "caseName": name[0]["result"],
                         "result": "同意",
                         "vote": agree + "票",
                         "percent": agree_rate
                     },
-                    "disagree":{                
+                    "disagree": {
                         "caseName": name[0]["result"],
                         "result": "不同意",
                         "vote": disagree + "票",
                         "percent": disagree_rate
                     },
-                    "void":{
+                    "void": {
                         "caseName": name[0]["result"],
                         "result": "廢票",
                         "vote": spoil + "票",
@@ -79,7 +78,7 @@ router.post('/voteResults', function (req, res) {
         }
     })
 })
-router.get("/proposal/:delibrationID/:proposalID", function(req, res){
+router.get("/proposal/:delibrationID/:proposalID", function (req, res) {
     var condition = {
         "delibrationID": req.body["delibrationID"],
         "proposalID": req.body["proposalID"]
@@ -87,11 +86,10 @@ router.get("/proposal/:delibrationID/:proposalID", function(req, res){
 
     var cols = ["dept", "reason", "description", "discussion"];
 
-    db.FindbyColumn("proposal", cols, condition, function(err, result){
-        if (err){
+    db.FindbyColumn("proposal", cols, condition, function (err, result) {
+        if (err) {
             console.log(err);
-        }
-        else{
+        } else {
             console.log("success");
             res.send(result);
         }
@@ -130,17 +128,43 @@ router.post('/resultsList', function (req, res) {
     })
 })
 
-router.post('/proposal/vote', function(req, res){
+router.post('/proposal/vote', function (req, res) {
     var caseID = req.body.caseID;
     var studentID = req.body.studentID;
     var result = req.body.result;
     var voteResultSql = "INSERT INTO vote(caseID, studentID, vote) VALUES ( " + caseID + "," + studentID + "," + result + ")";
-    db.Query(voteResultSql, function(voteResult){
-        if(voteResult.insertID.length == 0){
+    db.Query(voteResultSql, function (voteResult) {
+        if (voteResult.insertID.length == 0) {
             res.send("vote fail");
         } else {
             res.send("vote success");
         }
     });
 });
+
+router.post('/createProposal', function (req, res) {
+
+    var data = {
+        "delibrationID": req.body["delibrationID"],
+        "dept": req.body["dept"],
+        "reason": req.body["reason"],
+        "description": req.body["description"],
+        "discussion": req.body["discussion"],
+    }
+
+    db.Insert('proposal', data, function (err, result) {
+        if (err) {
+            console.log(err);
+            res.send({
+                create: "fail"
+            });
+        } else {
+            res.send({
+                create: "success"
+            });
+        }
+    })
+})
+
+
 module.exports = router;
