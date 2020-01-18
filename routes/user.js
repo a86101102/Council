@@ -45,4 +45,42 @@ router.post('/login',function(req, res){
 
 })
 
+router.post('/changeRole', function(req, res){
+    var condition = {
+        "studentID": req.body["studentID"]
+    };
+    var data = {
+        "role": 4
+    }
+    
+    db.Update('user', data, condition, function(err, result){
+        if (err){
+            console.log(err)
+            res.send({"change": "Change fail!"});
+        }else{
+            console.log("Update success")
+            res.send({"change": "Change success!"})
+        }
+    })
+})
+
+router.post('/deleteRole', function(req, res){
+    var condition = {
+        "studentID": req.body["studentID"]
+    };
+    var data = {
+        "role": 0
+    }
+    
+    db.Update('user', data, condition, function(err, result){
+        if (err){
+            console.log(err)
+            res.send({"change": "Change fail!"});
+        }else{
+            console.log("Update success")
+            res.send({"change": "Change success!"})
+        }
+    })
+})
+
 module.exports = router;
