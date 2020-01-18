@@ -26,11 +26,12 @@ router.post('/voteResults', function (req, res) {
                 disagree = 0,
                 total = 0;
             for (let n in votes) {
+                console.log(votes[n])
                 total = total + 1;
-                if (votes[n] == 1) {
+                if (votes[n]["result"] == 1) {
                     agree = agree + 1;
                 }
-                if (votes[n] == 2) {
+                if (votes[n]["result"] == 2) {
                     disagree = disagree + 1;
                 }
             }
