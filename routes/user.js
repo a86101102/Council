@@ -4,12 +4,13 @@ var db = require('../models/db');
 
 router.post('/signup',function (req, res){
     var data = {
-        "department": req.body.department,
-        "grade": req.body.grade,
-        "email": req.body.email,
-        "name": req.body.name,
-        "password": req.body.password,
-        "position": req.body.position
+        "studentID": req.body["studentID"],
+        "department": req.body["department"],
+        "grade": req.body["grade"],
+        "email": req.body["email"],
+        "name": req.body["name"],
+        "password": req.body["password"],
+        "position": req.body["position"]
     }
 
     console.log(data);
