@@ -3,12 +3,12 @@ var router = express.Router();
 
 router.get('/:delibrationID', function(req, res){
     var id = req.params.delibrationID;
-    let col = ['提案單位'];
-    db.FindbyColumn('proposal', col, {'delibrationID':id}, function(result, err){
+    db.Query('SELECT pName FROM proposal WHERE delibrationID =' + id, function(result){
         if(result.length == 0){
-            res.send('No data');
-        }else{
-            res.json(result[0]);
+            res.send("None");
+        }
+        else{
+            res.json(result);
         }
     })
 })
