@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+//mock api
+import '../mock'
+
 // css
 import './styles/style.scss';
 Vue.config.productionTip = false
