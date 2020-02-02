@@ -14,57 +14,60 @@
       <div class="schedule_block">
         <h4 class="schedule_block__title">四、議案與討論事項</h4>
         <div class="schedule_block__detail">
-          <div v-for="(proposal, index) in proposal_list" :key="index" class="case">
-            <router-link to="/conference_detail" tag="div" class="case__number">第{{index+1}}案</router-link>
+          <div v-for="(proposal, index) in proposalList" :key="index" class="case">
+            <router-link to="/conference_detail" tag="div" class="case__number">第{{convertNumber(index+1)}}案</router-link>
             <div class="case__proposer">{{proposal.sponsor}}</div>
           </div>
-      </div>
-      <div class="schedule_block">
-        <h4 class="schedule_block__title">五、臨時動議</h4>
-      </div>
-      <div class="schedule_block">
-        <h4 class="schedule_block__title">六、聲明與補述</h4>
-      </div>
-      <div class="schedule_block">
-        <h4 class="schedule_block__title">七、散會</h4>
+        </div>
+        <div class="schedule_block">
+          <h4 class="schedule_block__title">五、臨時動議</h4>
+        </div>
+        <div class="schedule_block">
+          <h4 class="schedule_block__title">六、聲明與補述</h4>
+        </div>
+        <div class="schedule_block">
+          <h4 class="schedule_block__title">七、散會</h4>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {delibrationID} from '../api/proposal'
+import {convertNumber} from '../services/converter'
+
 export default {
-  name: 'ConferenceSchedule',
+  name: "ConferenceSchedule",
   components: {
     // LoginWindow,
   },
   data() {
     return {
-      'proposal_list':[
-        {
-          proposalID: "A320000",
-          sponsor: "學生會長"
-        },
-        {
-          proposalID: "A320001",
-          sponsor: "文學院代"
-        },
-        {
-          proposalID: "A320002",
-          sponsor: "學生會長"
-        }
-      ]
-    }
+      proposalList: [],
+    };
+  },
+  created() {
+    this.getProposal('AX100')
+  },
+  methods: {
+    async getProposal(dID) {
+      let response = await delibrationID(dID)
+      this.proposalList = response.data
+    },
+    convertNumber(num) {
+      return convertNumber(num)
+    },
   }
-}
+};
 </script>
 
 <style lang="scss">
-.conference_schedule{
+.conference_schedule {
   width: 100%;
 }
 
-.topic{
+.topic {
   position: absolute;
   left: -20px;
   border-radius: 7px;
@@ -76,8 +79,8 @@ export default {
   margin-top: 20px;
 }
 
-.schedule_list{
-  letter-spacing:5px;
+.schedule_list {
+  letter-spacing: 5px;
   margin-top: 90px;
   width: 100%;
   display: flex;
@@ -85,14 +88,14 @@ export default {
   justify-content: center;
 }
 
-.schedule_block{
+.schedule_block {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-bottom: 7px;
-  &__title{
+  &__title {
     border-radius: 7px;
     background-color: $title1;
     color: #fff;
@@ -103,17 +106,17 @@ export default {
     width: 100%;
     max-width: 360px;
   }
-  &__detail{
+  &__detail {
     margin-top: 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .case{
+    .case {
       display: flex;
       align-items: center;
       margin-bottom: 5px;
-      &__number{
+      &__number {
         width: 140px;
         font-size: $text_s;
         color: #fff;
@@ -122,7 +125,7 @@ export default {
         border-radius: 7px;
         padding: 5px 0 5px 5px;
       }
-      &__proposer{
+      &__proposer {
         z-index: -1;
         position: relative;
         left: -7px;
@@ -143,6 +146,6 @@ export default {
 }
 
 // .schedule_title{
-  
+
 // }
 </style>

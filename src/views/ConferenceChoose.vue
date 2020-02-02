@@ -3,9 +3,9 @@
     <!-- <LoginWindow/> -->
     <p>請 選 擇 會 議</p>
     <div class="conference_list">
-      <router-link v-for="(item,index) in conference_list" :key="index" to="/conference_schedule" tag="div" class="conference_item">
+      <router-link v-for="(item,index) in conferenceList" :key="index" to="/conference_schedule" tag="div" class="conference_item">
         <div class="item_block">
-          <h3 class="item_block__session">{{item.semester}}學年度第{{item.period}}學期</h3>
+          <h3 class="item_block__session">{{item.semester}}學年度第{{convertNumber(item.period)}}學期</h3>
           <h2 class="item_block__name">{{item.name}}</h2>
           <div class="item_block__time">{{item.startTime}} 開放登入</div>
         </div>
@@ -17,7 +17,8 @@
 
 <script>
 // import LoginWindow from '@/components/LoginWindow.vue'
-
+import {delibration} from '../api/delibration'
+import {convertNumber} from '../services/converter'
 export default {
   name: 'ConferenceChoose',
   components: {
@@ -25,51 +26,20 @@ export default {
   },
   data(){
     return {
-      'conference_list':[
-        {
-          // session: "108學年度第一會期",
-          // name: "第一次財委會",
-          // time: "108.09.23 19:00",
-          // authority: "第四十三期學生代表大會 財委",
-          delibrationID: "AX782",
-          semester: "108",
-          period: "1",
-          name: "第一次財委會",
-          createTime: "109-01-07 22:00:00",
-          startTime: "109-02-02 12:00:00",
-          endTime: "109-02-02 13:00:00",
-          position: "第四十三期學生代表大會 財委",
-        },
-        {
-          // session: "108學年度第一會期",
-          // name: "第二次常會",
-          // time: "108.10.02 20:00",
-          // authority: "第四十三期學生代表大會 學代",
-          delibrationID: "AX782",
-          semester: "108",
-          period: "1",
-          name: "第二次常會",
-          createTime: "109-01-07 22:00:00",
-          startTime: "109-02-03 12:00:00",
-          endTime: "109-02-03 13:00:00",
-          position: "第四十三期學生代表大會 學代",
-        },
-        {
-        //   session: "108學年度第一會期",
-        //   name: "第一次財委會",
-        //   time: "108.09.23 19:00",
-        //   authority: "第四十三期學生代表大會 財委",
-          delibrationID: "AX782",
-          semester: "108",
-          period: "1",
-          name: "第一次財委會",
-          createTime: "109-01-07 22:00:00",
-          startTime: "109-02-02 12:00:00",
-          endTime: "109-02-02 13:00:00",
-          position: "第四十三期學生代表大會 財委",
-        }
-      ]
+      'conferenceList':[],
     }
+  },
+  created() {
+    this.getDelibration()
+  },
+  methods: {
+    async getDelibration() {
+      let response = await delibration()
+      this.conferenceList = response.data
+    },
+    convertNumber(num) {
+      return convertNumber(num)
+    },
   }
 }
 </script>
