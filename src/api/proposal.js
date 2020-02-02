@@ -5,16 +5,16 @@ import Request from '../services/http-request'
     @param {string} sponsor
 */
 
-export const delibrationID = () => {
+export const delibrationID = (dID) => {
     return Request({
-        url: "proposal/:delibrationID",
+        url: "proposal/" + dID,
         method: 'get'
     })
 }
 
-export const proposalID = () => {
+export const proposalID = (dID, pID) => {
     return Request({
-        url: "proposal/:delibrationID/:proposalID",
+        url: "proposal/" + dID + "/" + pID,
         method: 'get'
     })
 }
