@@ -2,7 +2,8 @@
 
 //const Random = Mock.Random
 
-const delibration = {
+const delibration = [
+  {
     delibrationID: 'AX100',
     proposals: [{
         "proposalID": 'A320000',
@@ -11,7 +12,21 @@ const delibration = {
         "proposalID": 'A320001',
         "sponsor": "文學院代",
     }]
-}
+  },
+  {
+    delibrationID: 'AX101',
+    proposals: [{
+        "proposalID": 'A320000',
+        "sponsor": "工學院代",
+    }, {
+        "proposalID": 'A320001',
+        "sponsor": "理學院代",
+    },{
+      "proposalID": 'A320002',
+      "sponsor": "學生會長",
+    }]
+  }
+]
 
 const proposal = {
     "dept": "會長 蔡一愷",
@@ -30,16 +45,24 @@ export default [
     //取得某特定議事的所有議案 /proposal/:delibrationID
     //Request for AX100, return two proposals
     {
-        url: '/proposal/' + delibration.delibrationID,
+        url: '/proposal/' + delibration[0].delibrationID,
         method: 'get',
         response: () => {
-            return delibration.proposals
+            return delibration[0].proposals
         }
+    },
+    //Request for AX101, return three proposals
+    {
+      url: '/proposal/' + delibration[1].delibrationID,
+      method: 'get',
+      response: () => {
+          return delibration[1].proposals
+      }
     },
     //取得某特定議案內容 /proposal/:delibrationID/:proposalID
     //Request for AX100/A320000, Return proposal
     {
-        url: '/proposal/' + delibration.delibrationID + '/' + delibration.proposals[0].proposalID,
+        url: '/proposal/' + delibration[0].delibrationID + '/' + delibration[0].proposals[0].proposalID,
         method: 'get',
         response: () => {
             return proposal
