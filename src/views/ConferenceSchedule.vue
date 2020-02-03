@@ -19,15 +19,15 @@
             <div class="case__proposer">{{proposal.sponsor}}</div>
           </div>
         </div>
-        <div class="schedule_block">
-          <h4 class="schedule_block__title">五、臨時動議</h4>
-        </div>
-        <div class="schedule_block">
-          <h4 class="schedule_block__title">六、聲明與補述</h4>
-        </div>
-        <div class="schedule_block">
-          <h4 class="schedule_block__title">七、散會</h4>
-        </div>
+      </div>
+      <div class="schedule_block">
+        <h4 class="schedule_block__title">五、臨時動議</h4>
+      </div>
+      <div class="schedule_block">
+        <h4 class="schedule_block__title">六、聲明與補述</h4>
+      </div>
+      <div class="schedule_block">
+        <h4 class="schedule_block__title">七、散會</h4>
       </div>
     </div>
   </div>
@@ -48,7 +48,7 @@ export default {
     };
   },
   created() {
-    this.getProposal('AX100')
+    this.getProposal(this.$route.params.delibrationID)
   },
   methods: {
     async getProposal(dID) {
