@@ -3,12 +3,6 @@
     <router-link :to="item[1]" tag="div" class="home__block_link" :class="{unopened : !item[1]}" v-for="(item, index) in home_link" :key="index">
       {{item[0]}}
     </router-link>
-    <!-- <router-link to="/" tag="div" class="block_link unopened">公共提案</router-link>
-    <router-link to="/" tag="div" class="block_link unopened">選舉系統</router-link>
-    <router-link to="/" tag="div" class="block_link unopened">近期議案</router-link>
-    <router-link to="/" tag="div" class="block_link unopened">會議記錄</router-link>
-    <router-link to="/" tag="div" class="block_link unopened">法規查詢</router-link>
-    <router-link to="/about" tag="div" class="block_link">登入會議</router-link> -->
   </div>
 </template>
 
@@ -26,7 +20,7 @@ export default {
         ["近期議案",""],
         ["會議記錄",""],
         ["法規查詢",""],
-        ["登入會議","/conference_choose"]
+        ["登入會議","/conference"]
       ]
     }
   },
