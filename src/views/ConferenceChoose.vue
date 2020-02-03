@@ -3,7 +3,7 @@
     <!-- <LoginWindow/> -->
     <p>請 選 擇 會 議</p>
     <div class="conference_list">
-      <router-link v-for="(item,index) in conferenceList" :key="index" to="/conference_schedule" tag="div" class="conference_item">
+      <router-link v-for="(item,index) in conferenceList" :key="index" :to="{name: 'schedule', params: {delibrationID:item.delibrationID}}" tag="div" class="conference_item">
         <div class="item_block">
           <h3 class="item_block__session">{{item.semester}}學年度第{{convertNumber(item.period)}}學期</h3>
           <h2 class="item_block__name">{{item.name}}</h2>
