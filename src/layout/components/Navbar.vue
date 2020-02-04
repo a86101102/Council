@@ -4,7 +4,11 @@
     <router-link to="/" tag="div" class="navbar__icon">
       <img src="@/assets/brand-icon.svg">
     </router-link>
-    <h1 class="navbar__title">{{page_name}}</h1>
+    <h1 class="navbar__title" v-show="!$route.params.delibrationID">{{$route.meta.title}}</h1>
+    <div class="navbar__title" v-show="$route.params.delibrationID">
+      <p class="session">{{semester}}學年度第{{period}}會期</p>
+      <h2 class="name">{{name}}</h2>
+    </div>
   </div>
 </template>
 
@@ -12,9 +16,9 @@
 export default {
   name: 'Navbar',
   props:{
-    page_name:{
-      default:"成大學代會",
-    },
+    semester:Number,
+    period:Number,
+    name:String
   }
 }
 </script>
@@ -42,10 +46,15 @@ export default {
     }
   }
   &__title{
-    // font-size: $text_l;
-    // font-weight: 700;
-    margin: 0;
     margin-left: 18px;
+    .session{
+      margin: 0;
+      text-align: left;
+      height: 22px;
+    }
+    .name{
+      height: 38px;
+    }
   }
 }
 

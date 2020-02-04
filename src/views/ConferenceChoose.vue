@@ -4,12 +4,14 @@
     <p>請 選 擇 會 議</p>
     <div class="conference_list">
       <router-link v-for="(item,index) in conferenceList" :key="index" :to="{name: 'schedule', params: {delibrationID:item.delibrationID}}" tag="div" class="conference_item">
-        <div class="item_block">
-          <h3 class="item_block__session">{{item.semester}}學年度第{{convertNumber(item.period)}}學期</h3>
-          <h2 class="item_block__name">{{item.name}}</h2>
-          <div class="item_block__time">{{item.startTime}} 開放登入</div>
+        <div @click="$emit('update-title', item.semester, item.period, item.name)" style="width:100%">
+          <div class="item_block" >
+            <h3 class="item_block__session">{{item.semester}}學年度第{{convertNumber(item.period)}}學期</h3>
+            <h2 class="item_block__name">{{item.name}}</h2>
+            <div class="item_block__time">{{item.startTime}} 開放登入</div>
+          </div>
+          <p class="item_authority">權限：{{item.position}}</p>
         </div>
-        <p class="item_authority">權限：{{item.position}}</p>
       </router-link>
     </div>
   </div>
@@ -63,6 +65,7 @@ export default {
 
 .conference_item{
   width: 100%;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   align-items: center;

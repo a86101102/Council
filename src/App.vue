@@ -3,9 +3,9 @@
     <LoginWindow style="display: none"/>
     <ErrorWindow style="display: none"/>
     <!-- <VoteWindow/> -->
-    <Navbar :page_name="$route.meta.title"/>
+    <Navbar :semester="semester" :period="period" :name="name"/>
     <div id="main" class="container">
-      <router-view/>
+      <router-view @update-title="updateTitle1"/>
     </div>
     <Footer/>
   </div>
@@ -28,9 +28,21 @@ export default {
     ErrorWindow,
     // VoteWindow,
   },
-  // computed: mapState([
-  //   'page'
-  // ]),
+  data(){
+    return {
+      semester: 0,
+      period: 0,
+      name: '成大學代會'
+    }
+  },
+  methods: {
+    updateTitle1(semester, period, name) {
+      console.log(semester, period, name)
+      this.semester = semester
+      this.period = period
+      this.name = name
+    },
+  }
 }
 </script>
 
