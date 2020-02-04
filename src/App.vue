@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <LoginWindow style="display: none"/>
-    <ErrorWindow style="display: none"/>
     <!-- <VoteWindow/> -->
     <Navbar :semester="semester" :period="period" :name="name"/>
     <div id="main" class="container">
@@ -14,8 +12,6 @@
 <script>
 import Navbar from '@/layout/components/Navbar.vue'
 import Footer from '@/layout/components/Footer.vue'
-import LoginWindow from '@/components/LoginWindow.vue'
-import ErrorWindow from '@/components/ErrorWindow.vue'
 // import VoteWindow from '@/components/VoteWindow.vue'
 // import { mapState } from 'vuex'
 
@@ -24,8 +20,6 @@ export default {
   components: {
     Navbar,
     Footer,
-    LoginWindow,
-    ErrorWindow,
     // VoteWindow,
   },
   data(){
