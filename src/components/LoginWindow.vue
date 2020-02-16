@@ -1,5 +1,6 @@
 <template>
   <div class="login_window container window">
+    <div class="close_layer" @click="$emit('close-window')"></div>
     <div class="login_container">
       <div class="login_target">
         <div class="conference_item">
@@ -11,17 +12,17 @@
           <p class="item_authority">權限：{{position}}</p>
         </div>
       </div>
-      <div class="login_form">
+      <form class="login_form">
         <div class="login_form__account">
           <label for="account">帳 號</label>
-          <input v-model="studentID" name="account" type="text" placeholder="學號">
+          <input class="input" id="account" v-model="studentID" type="text" placeholder="學號" required>
         </div>
         <div class="login_form__password">
           <label for="password">密 碼</label>
-          <input v-model="password" name="password" type="password" placeholder="學號信箱密碼">
+          <input class="input" id="password" v-model="password" type="password" placeholder="學號信箱密碼" required>
         </div>
-        <button class="login_form__enter" @click="login(studentID, password)">登 入</button>
-      </div>
+        <input type="submit" text="登 入" class="login_form__enter" @click="login(studentID, password)">
+      </form>
     </div>
   </div>
 </template>
@@ -48,9 +49,11 @@ export default {
   },
   methods: {
     async login(studentID, password) {
-      let response = await login(studentID, password);
-      if (response.data.isLogin === "success") {
-        router.push({name: 'schedule', params: {delibrationID:this.delibrationID}})
+      if(this.studentID!=='' && this.password!=='') {
+        let response = await login(studentID, password);
+        if (response.data.isLogin === "success") {
+          router.push({name: 'schedule', params: {delibrationID:this.delibrationID}})
+        }
       }
     }
   }
@@ -60,10 +63,16 @@ export default {
 <style lang="scss">
 .login_container{
   width: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  align-items: center;
   .login_target{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
   }
   .login_form{
     display: flex;
@@ -73,7 +82,7 @@ export default {
     label{
       color:$title1;
     }
-    input{
+    input.input{
       text-align: center;
       font-size: $text;
       border: 1.5px #767171 solid;
@@ -95,5 +104,10 @@ export default {
       cursor: pointer;
     }
   }
+}
+.close_layer{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
 }
 </style>

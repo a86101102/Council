@@ -8,6 +8,7 @@
       :startTime="startTime"
       :position="position"
       v-if="LOGIN_SHOW"
+      @close-window="LOGIN_SHOW = 0"
     />
     <ErrorWindow style="display: none" />
     <p>請 選 擇 會 議</p>
