@@ -15,7 +15,7 @@
         <h4 class="schedule_block__title">四、議案與討論事項</h4>
         <div class="schedule_block__detail">
           <div v-for="(proposal, index) in proposalList" :key="index" class="case">
-            <router-link :to="{name: 'detail'}" tag="div" class="case__number">第{{convertNumber(index+1)}}案</router-link>
+            <router-link :to="{name: 'detail',params: {proposalID:proposal.proposalID}}" tag="div" class="case__number">第{{convertNumber(index+1)}}案</router-link>
             <div class="case__proposer">{{proposal.sponsor}}</div>
           </div>
         </div>

@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     updateTitle1(semester, period, name) {
-      console.log(semester, period, name)
+      // console.log(semester, period, name)
       this.semester = semester
       this.period = period
       this.name = name

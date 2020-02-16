@@ -17,23 +17,21 @@
         <td class="title" width="25px">案次</td>
         <td class="title_data">第一案</td>
         <td class="title" width="50px">提案單位</td>
-        <td class="title_data">會長 蔡一愷</td>
+        <td class="title_data">{{proposal.dept}}</td>
       </tr>
       <tr class="case_summary">
         <td class="title">案由</td>
-        <td colspan="3" align="left">行政部門第一預算期間追加預算三讀案，共計76,700元整</td>
+        <td colspan="3" align="left">{{proposal.reason}}</td>
       </tr>
       <tr class="case_description">
         <td class="title">說明</td>
         <td colspan="3" align="left">
-          <li>一、第一預算期間(6月至9月)追加預算共76,700元整，詳如附表。</li> 
-          <li>二、第一會期第一次常會(6/11)一讀通過，附帶決議准許行政部門先動支後補正程序。</li>
-          <li>三、第一會期第一次財政與預算委員會二讀通過，詳見會議記錄。</li>
+          <li v-for="(description,index) in proposal.description" :key="index">{{description}}</li>
         </td>
       </tr>
       <tr>
         <td class="title">討論</td>
-        <td colspan="3" align="left">紀錄中......</td>
+        <td colspan="3" align="left">{{proposal.discussion}}</td>
       </tr>
     </table>
     <VoteWindow style="display:none"/>
@@ -44,12 +42,27 @@
 <script>
 import VoteWindow from '@/components/VoteWindow.vue'
 import VoteDetailWindow from '@/components/VoteDetailWindow.vue'
+import { proposalID } from '../api/proposal'
 
 export default {
   name: 'ConferenceDetail',
   components: {
     VoteWindow,
     VoteDetailWindow,
+  },
+  data() {
+    return{
+      proposal: {},
+    }
+  },
+  created() {
+    this.getProposalDetail(this.$route.params.delibrationID, this.$route.params.proposalID)
+  },
+  methods: {
+    async getProposalDetail(dID, pID) {
+      let response = await proposalID(dID, pID);
+      this.proposal = response.data;
+    },
   }
 }
 </script>
