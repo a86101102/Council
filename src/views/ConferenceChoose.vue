@@ -17,7 +17,7 @@
         v-for="(item,index) in conferenceList"
         :key="index"
         class="conference_item"
-        @click="setLoginWindow(item.delibrationID, item.semester, item.period, item.name, item.startTime, item.position)"
+        @click="openLoginWindow(item.delibrationID, item.semester, item.period, item.name, item.startTime, item.position)"
       >
         <div class="item_block">
           <h3 class="item_block__session">{{item.semester}}學年度第{{convertNumber(item.period)}}學期</h3>
@@ -65,7 +65,7 @@ export default {
     convertNumber(num) {
       return convertNumber(num);
     },
-    setLoginWindow(delibrationID, semester, period, name, startTime, position) {
+    openLoginWindow(delibrationID, semester, period, name, startTime, position) {
       this.$emit('update-title', semester, period, name)
       this.delibrationID = delibrationID
       this.semester = semester
