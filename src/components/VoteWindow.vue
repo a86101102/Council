@@ -2,9 +2,9 @@
   <div class="vote_window">
     <h3 class="vote_topic">第一案 決議投票</h3>
     <div class="vote_block">
-      <button class="vote_button agree_vote">同意</button>
-      <button class="vote_button against_vote">反對</button>
-      <button class="vote_button null_vote">廢票</button>
+      <button class="vote_button " :class="[clicked[0]===false ? 'agree_vote' : 'no_vote']" @click="handleClick(0)" :disabled="clicked[0]">同意</button>
+      <button class="vote_button " :class="[clicked[1]===false ? 'against_vote' : 'no_vote']" @click="handleClick(1)" :disabled="clicked[1]">反對</button>
+      <button class="vote_button " :class="[clicked[2]===false ? 'null_vote' : 'no_vote']" @click="handleClick(2)" :disabled="clicked[2]">廢票</button>
     </div>
   </div>
 </template>
@@ -12,6 +12,18 @@
 <script>
 export default {
   name: "VoteWindow",
+  data() {
+    return {
+      clicked: [false, false, false]
+    }
+  },
+  methods: {
+    handleClick(index){
+      for(var i = 0; i<this.clicked.length; i++){
+        index === i ? this.$set(this.clicked, i, false) : this.$set(this.clicked, i, true)
+      }
+    }
+  }
 }
 </script>
 
@@ -62,5 +74,8 @@ export default {
 }
 .null_vote{
   background-color: #000;
+}
+.no_vote{
+  background-color: gray;
 }
 </style>
