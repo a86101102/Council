@@ -70,7 +70,7 @@ export default [
     },
     //針對當前議案進行記名投票 /proposal/vote
     {
-        url: '‘/proposal/vote',
+        url: '/proposal/vote',
         method: 'post',
         response: (req) => {
             const {
@@ -91,19 +91,26 @@ export default [
     },
     //計算並顯示當前議案的投票結果 /proposal/voteResults
     {
-        url: '‘/proposal/voteResults',
+        url: '/proposal/voteResults',
         method: 'post',
         response: (req) => {
             const {
-                delibrationID,
-                proposalID
+                caseID
             } = req.body
-            if (delibrationID && proposalID) {
+            if (caseID) {
                 return {
-                    "proposalID": "A320000",
+                    "caseName": "修正動議投票",
                     "result": "同意",
-                    "vote": 22,
-                    "persent": "88%"
+                    "vote": {
+                        "agree": 22,
+                        "against": 2,
+                        "null": 1
+                    },
+                    "percent": {
+                        "agree": 88,
+                        "against": 8,
+                        "null": 4
+                    }
                 }
             } else {
                 return {
