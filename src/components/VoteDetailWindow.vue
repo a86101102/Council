@@ -177,8 +177,32 @@
 </template>
 
 <script>
+import { voteResults } from '../api/proposal'
+
 export default {
   name: "VoteDetailWindow",
+  data() {
+    return {
+      voteResult : {},
+      // "caseName": "",
+      // "result": "",
+      // "vote": {},
+      // "percent": {}
+    }
+  },
+  created(){
+    this.getVoteResults(10782)
+  },
+  methods: {
+    async getVoteResults(caseID) {
+      let response = await voteResults(caseID);
+      this.voteResult = response.data;
+      // this.caseName = response.data.caseName
+      // this.result = response.data.result
+      // this.vote = response.data.vote
+      // this.percent = response.data.percent
+    },
+  }
 }
 </script>
 
