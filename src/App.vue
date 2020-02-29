@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <!-- <VoteWindow/> -->
     <Navbar :semester="semester" :period="period" :name="name"/>
     <div id="main" class="container">
       <router-view @update-title="updateTitle1"/>
     </div>
+    <VoteWindow/>
     <Footer/>
   </div>
 </template>
@@ -12,7 +12,8 @@
 <script>
 import Navbar from '@/layout/components/Navbar.vue'
 import Footer from '@/layout/components/Footer.vue'
-// import VoteWindow from '@/components/VoteWindow.vue'
+import VoteWindow from '@/components/VoteWindow.vue'
+// import VoteDetailWindow from '@/components/VoteDetailWindow.vue'
 // import { mapState } from 'vuex'
 
 export default {
@@ -20,7 +21,7 @@ export default {
   components: {
     Navbar,
     Footer,
-    // VoteWindow,
+    VoteWindow,
   },
   data(){
     return {

@@ -31,6 +31,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "ConferenceSchedule" */ '../views/ConferenceSchedule.vue'),
   },
   {
+    path: '/vote',
+    name: 'vote',
+    component: () => import(/* webpackChunkName: "ConferenceSchedule" */ '../components/VoteDetailWindow.vue'),
+  },
+  {
     path: '/conference/:delibrationID/proposal/:proposalID',
     name: 'detail',
     component: () => import(/* webpackChunkName: "ConferenceDetail" */ '../views/ConferenceDetail.vue'),
