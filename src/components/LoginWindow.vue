@@ -12,7 +12,7 @@
           <p class="item_authority">權限：{{position}}</p>
         </div>
       </div>
-      <form class="login_form">
+      <div class="login_form">
         <div class="login_form__account">
           <label for="account">帳 號</label>
           <input class="input" id="account" v-model="studentID" type="text" placeholder="學號" required>
@@ -21,8 +21,8 @@
           <label for="password">密 碼</label>
           <input class="input" id="password" v-model="password" type="password" placeholder="學號信箱密碼" required>
         </div>
-        <input type="submit" text="登 入" class="login_form__enter" @click="login(studentID, password)">
-      </form>
+        <button class="login_form__enter" @click="login(studentID, password)">登 入</button>
+      </div>
     </div>
   </div>
 </template>
