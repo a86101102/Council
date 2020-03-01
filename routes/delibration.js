@@ -29,27 +29,28 @@ router.post('/createDelibration', function (req, res) {
 
     // var startTime = moment(data.myTime.format(req.body["startTime"])).toISOString();
 
-    var data = {
-        "dName": req.body["dName"],
-        "startTime": req.body["startTime"],
-        "position": req.body["position"],
-        "semester": req.body["semester"],
-        "period": req.body["period"],
-    }
-
-    // myDate = moment(data.myTime.format('YYYY/MM/DD HH:MM:SS')).toISOString();
-
-    db.Insert('delibration', data, function (err, result) {
-        if (err) {
-            console.log(err);
-            res.send({
-                create: "fail"
-            });
-        } else {
-            res.send({
-                create: "success"
-            });
+    if (req.body["dName"] && req.body["startTime"] && req.body["position"] && req.body["semester"] && req.body["period"]) {
+        var data = {
+            "dName": req.body["dName"],
+            "startTime": req.body["startTime"],
+            "position": req.body["position"],
+            "semester": req.body["semester"],
+            "period": req.body["period"],
         }
-    })
+
+
+        // myDate = moment(data.myTime.format('YYYY/MM/DD HH:MM:SS')).toISOString();
+
+        db.Insert('delibration', data, function (err, result) {
+            if (err) {
+                console.log(err);
+                res.sendStatus(403)
+            } else {
+                res.sendStatus(201)
+            }
+        })
+    } else {
+        res.sendStatus(400)
+    }
 })
 module.exports = router;

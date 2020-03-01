@@ -101,6 +101,7 @@ router.post('/resultsList', function (req, res) {
     db.Query('SELECT studentID, result FROM `vote` WHERE caseID=' + CID, function (votesInfo, err) {
         if (err) {
             console.log(err);
+            res.sendStatus(400)
         } else {
             data = []
             for (let n in votesInfo) {
@@ -109,18 +110,24 @@ router.post('/resultsList', function (req, res) {
                 var column = ['department', 'uName'];
                 db.FindbyColumn('user', column, {
                     "studentID": votesInfo[n]["studentID"]
-                }, function (userinfo) {
-                    studentVoteInfo = {
-                        "index": parseInt(n) + 1,
-                        "department": userinfo[0]["department"],
-                        "name": userinfo[0]["uName"],
-                        "voteResult": votesInfo[n]["result"]
-                    }
-                    // console.log("PPP: ", studentVoteInfo)
-                    data.push(studentVoteInfo)
+                }, function (userinfo, err) {
+                    if (err) {
+                        console.log(err);
+                        res.sendStatus(400)
+                    } else {
+                        studentVoteInfo = {
+                            "index": parseInt(n) + 1,
+                            "department": userinfo[0]["department"],
+                            "name": userinfo[0]["uName"],
+                            "voteResult": votesInfo[n]["result"]
+                        }
+                        // console.log("PPP: ", studentVoteInfo)
+                        data.push(studentVoteInfo)
 
-                    if (n == votesInfo.length - 1)
-                        res.send(data)
+                        if (n == votesInfo.length - 1)
+                            // res.send(data)
+                            res.status(200).send(data)
+                    }
 
                 })
             }
@@ -144,26 +151,30 @@ router.post('/proposal/vote', function (req, res) {
 
 router.post('/createProposal', function (req, res) {
 
-    var data = {
-        "delibrationID": req.body["delibrationID"],
-        "dept": req.body["dept"],
-        "reason": req.body["reason"],
-        "description": req.body["description"],
-        "discussion": req.body["discussion"],
-    }
-
-    db.Insert('proposal', data, function (err, result) {
-        if (err) {
-            console.log(err);
-            res.send({
-                create: "fail"
-            });
-        } else {
-            res.send({
-                create: "success"
-            });
+    if (req.body["delibrationID"] && req.body["dept"]) {
+        var data = {
+            "delibrationID": req.body["delibrationID"],
+            "dept": req.body["dept"],
+            "reason": req.body["reason"],
+            "description": req.body["description"],
+            "discussion": req.body["discussion"],
         }
-    })
+
+        db.Insert('proposal', data, function (err, result) {
+            if (err) {
+                console.log(err);
+                // res.send({
+                //     create: "fail"
+                // });
+                res.sendStatus(403)
+
+            } else {
+                res.sendStatus(201)
+            }
+        })
+    } else {
+        res.sendStatus(400)
+    }
 })
 
 
