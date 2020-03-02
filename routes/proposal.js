@@ -89,8 +89,10 @@ router.get("/proposal/:delibrationID/:proposalID", function (req, res) {
     db.FindbyColumn("proposal", cols, condition, function (err, result) {
         if (err) {
             console.log(err);
+            res.status(400).send("fail");
         } else {
             console.log("success");
+            res.status(200).send("sucess");
             res.send(result);
         }
     })
