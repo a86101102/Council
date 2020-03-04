@@ -36,13 +36,9 @@ router.post('/login', function (req, res) {
             console.log(err);
         } else {
             if (pw == result[0]["password"]) {
-                res.send({
-                    isLogin: "success"
-                });
+                res.sendStatus(200);
             } else {
-                res.send({
-                    isLogin: "fail"
-                });
+                res.sendStatus(403);
             }
         }
     })
