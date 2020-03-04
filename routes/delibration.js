@@ -18,9 +18,10 @@ router.get('/entry', function (req, res) {
     var now = myDate.toLocaleString();
     db.Query('SELECT semester,period,dName,startTime,position FROM delibration WHERE delibrationID =' + id, function (result) {
         if (now >= result.startTime) {
-            res.json(result);
+            res.status(200).send("sucess");
+            res.send(result);
         } else {
-            res.send("fail");
+            res.status(403).send("fail");
         }
     })
 })
