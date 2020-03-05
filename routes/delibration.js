@@ -4,11 +4,16 @@ var db = require('../models/db');
 
 router.get('/', function (req, res) {
     var sql = 'SELECT * FROM delibration'
-    db.Query(sql, function (delibration) {
-        if (delibration.length == 0) {
-            res.send("fail");
+    db.Query(sql, function (delibration, err) {
+        if(err){
+            console.log(err);
+            res.sendStatus(400);
         } else {
-            res.send(delibration);
+            if (delibration.length == 0) {
+                res.status(404).send("Cannnot find.");
+            } else {
+                res.status(200).send(delibration);
+            }
         }
     });
 })
