@@ -18,13 +18,9 @@ router.post('/signup', function (req, res) {
     db.Insert("user", data, function (err, result) {
         if (err) {
             console.log(err);
-            res.send({
-                create: "Create fail!"
-            });
+            res.status(400).send("fail");
         } else {
-            res.send({
-                create: "Create success!"
-            });
+            res.status(200).send("success");
         }
     })
 })
@@ -40,13 +36,9 @@ router.post('/login', function (req, res) {
             console.log(err);
         } else {
             if (pw == result[0]["password"]) {
-                res.send({
-                    isLogin: "success"
-                });
+                res.sendStatus(200);
             } else {
-                res.send({
-                    isLogin: "fail"
-                });
+                res.sendStatus(403);
             }
         }
     })
@@ -64,10 +56,10 @@ router.post('/changeRole', function(req, res){
     db.Update('user', data, condition, function(err, result){
         if (err){
             console.log(err)
-            res.send({"change": "Change fail!"});
+            res.status(400).send("fail");
         }else{
             console.log("Update success")
-            res.send({"change": "Change success!"})
+            res.status(200).send("sucess");
         }
     })
 })
@@ -83,10 +75,10 @@ router.post('/deleteRole', function(req, res){
     db.Update('user', data, condition, function(err, result){
         if (err){
             console.log(err)
-            res.send({"change": "Change fail!"});
+            res.status(400).send("fail");
         }else{
             console.log("Update success")
-            res.send({"change": "Change success!"})
+            res.status(200).send("sucess");
         }
     })
 })
