@@ -65,9 +65,9 @@ router.get('/:position', function (req, res) {
     var sql = "SELECT * FROM delibration WHERE position = " + position
     db.Query(sql, function (delibration) {
         if (delibration.length == 0) {
-            res.send("fail");
+            res.sendStatus(204);
         } else {
-            res.send(delibration);
+            res.status(200).send(delibration);
         }
     });
 })
