@@ -52,4 +52,17 @@ router.post('/createDelibration', function (req, res) {
         }
     })
 })
+
+router.get('/:position', function (req, res) {
+    var position = req.params["position"].toString();
+    var sql = "SELECT * FROM delibration WHERE position = " + position
+    db.Query(sql, function (delibration) {
+        if (delibration.length == 0) {
+            res.send("fail");
+        } else {
+            res.send(delibration);
+        }
+    });
+})
+
 module.exports = router;
