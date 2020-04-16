@@ -40,7 +40,7 @@ export const vote = (caseID, studentID, result) => {
 
 export const voteResults = (caseID) => {
     return Request({
-        url: "proposal/voteResult",
+        url: "proposal/voteResults",
         data: {
             "caseID": caseID
         },

@@ -12,5 +12,5 @@ const mocks = [
 ]
 
 for (const i of mocks) {
-    Mock.mock(baseUrl + i.url, i.type || 'get', i.response)
+    Mock.mock(baseUrl + i.url, i.type || i.method, i.response)
 }
