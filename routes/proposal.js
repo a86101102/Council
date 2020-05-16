@@ -137,11 +137,11 @@ router.post('/resultsList', function (req, res) {
     })
 })
 
-router.post('/proposal/vote', function (req, res) {
+router.post('/vote', function (req, res) {
     var caseID = req.body.caseID;
     var studentID = req.body.studentID;
     var result = req.body.result;
-    var voteResultSql = "INSERT INTO vote(caseID, studentID, vote) VALUES ( " + caseID + "," + studentID + "," + result + ")";
+    var voteResultSql = "INSERT INTO vote (caseID, studentID, result) VALUES ( " + caseID + ", '" + studentID + "', " + result + ")";
     db.Query(voteResultSql, function (voteResult, err) {
         if(err){
             console.log(err);
