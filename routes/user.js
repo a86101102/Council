@@ -30,19 +30,21 @@ router.post('/login', function (req, res) {
     var pw = req.body.password;
 
 
-    db.Query("SELECT password FROM `user` WHERE studentID='" + ID + "'", function (result, err) {
-        // console.log("password: ", result)
+    db.Query("SELECT password, position FROM `user` WHERE studentID='" + ID + "'", function (result, err) {
         if (err) {
             console.log(err);
         } else {
             if (pw == result[0]["password"]) {
-                res.sendStatus(200);
+                var data = {
+                    "studentID": ID,
+                    "position": result[0].position
+                }
+                res.status(200).send(data);
             } else {
                 res.sendStatus(403);
             }
         }
     })
-
 })
 
 router.post('/changeRole', function(req, res){
