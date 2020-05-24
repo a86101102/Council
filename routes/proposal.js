@@ -180,5 +180,56 @@ router.post('/createProposal', function (req, res) {
     }
 })
 
+router.post('/saveEditDelibration/:id', function (req, res) {
+
+    user_id = req.params.id
+
+    var data_delibration = {
+        //"id": req.body["delibrationID"],
+        "dName":req.body["name"],
+        "createTime":req.body["createTime"],
+        "startTime":req.body["startTime"],
+        "endTime":req.body["endTime"],
+        "position":req.body["position"],
+        "semester":req.body["semester"],
+        "period":req.body["period"]
+    }
+
+    var proposals = req.body["proposal"]
+
+    db.FindbyColumn('user',["position"],{"id":user_id} ,function(result){
+
+        if (result[0]["position"] == "leader") {
+
+            db.Update('delibration', data_delibration, {"id":req.body["delibrationID"]} ,function(err){
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(403)
+                }
+            })
+
+            for (var data in proposals) {
+                
+                var data_proposal = {
+                    "dept": proposals[data]["dept"],
+                    "reason": proposals[data]["reason"],
+                    "description": proposals[data]["description"],
+                    "discussion": proposals[data]["discussion"]
+                }
+
+                db.Update('proposal', data_proposal, {"delibrationID":req.body["delibrationID"]} ,function(err){
+                    if (err) {
+                        console.log(err);
+                        res.sendStatus(403)
+                    }
+                })
+            }
+            res.sendStatus(201)
+        } else {
+            res.sendStatus(400)
+        }
+    })
+})
+
 
 module.exports = router;
